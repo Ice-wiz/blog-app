@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { createPost } from "@/app/actions/publishPost";
 import Link from "next/link";
-// import type { Category } from '@prisma/client';
-// import CategoryDropdown from './CategoryDropdown';
+import type { Category } from '@prisma/client';
+import CategoryDropdown from './CategoryDropdown';
 import { Prisma } from "@prisma/client";
 
 type Props = {
-  // blogCategories: Category[]
+  blogCategories: Category[]
 };
 
 // You need to import our styles for the button to look right. Best to import in the root /layout.tsx but this is fine
@@ -47,11 +47,11 @@ const NewBlogForm = (props: Props) => {
         imgURL: thumbnail,
       };
 
-      // if (categoryId) {
-      //   newPost.categories = {
-      //     connect: [{ id: categoryId }]
-      //   }
-      // }
+      if (categoryId) {
+        newPost.categories = {
+          connect: [{ id: categoryId }]
+        }
+      }
       const post = await createPost(newPost);
       setPostID(post.id);
       setSubmitted(true);
@@ -122,7 +122,7 @@ const NewBlogForm = (props: Props) => {
               alert(`ERROR! ${error.message}`);
             }}
           />
-          {/* <CategoryDropdown list={props.blogCategories} selected={categoryId} setSelected={(selected: number) => setCategoryId(selected)} /> */}
+          <CategoryDropdown list={props.blogCategories} selected={categoryId} setSelected={(selected: number) => setCategoryId(selected)} />
         </div>
         <button
           type="submit"
