@@ -21,9 +21,7 @@ const bgClasses=[
     'bg-green-400',
     'bg-indigo-400',
     'bg-red-400',
-    
 ]
-
 
  return (
     <div className='p-4 rounded border-2'>

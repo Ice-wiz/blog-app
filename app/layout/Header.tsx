@@ -10,9 +10,8 @@ const Header=(props:Props)=>{
     return(
         <SessionProvider>
         <div className='border-b flex justify-between'>
-            <div className='text-4xl px-2 py-2 '>LOGO
-            </div>
-            <AuthButton/>
+            <div className='text-4xl px-2 py-3 '>LOGO</div>
+            <div><AuthButton/></div>
         </div>
         </SessionProvider>
     )

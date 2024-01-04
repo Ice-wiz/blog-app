@@ -1,4 +1,4 @@
-import type { Adapter } from 'next-auth/adapters';
+import type { Adapter } from "next-auth/adapters";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
@@ -16,6 +16,21 @@ const handler = NextAuth({
   ],
   session: {
     strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user?.id) {
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      let sessionWithId = session as any;
+      if (sessionWithId.user) {
+        sessionWithId.user.id = token.id;
+      }
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_URLSECRET as string,
   debug: true,

@@ -15,14 +15,29 @@ export const Button = (props: Props) => {
 
   if (session) {
     return (
-      <div className='flex items-stretch'>
-        <Link href="/blog/new" className='mr-6 hover:underline self-center'>✍️ Write a Post</Link>
+      <div className='flex'>
+        <Link href="/blog/new" className='mr-6 hover:underline self-center'>✍️Blog</Link>
+        <div>
+        <img
+          style={{
+            borderRadius: '50%',
+            height: '50px', // Adjust the height as needed
+            width: '50px', // Adjust the width as needed
+            marginRight: '8px', // Adjust the margin as needed
+            marginTop:'0.5px',
+            marginBottom:'0.5px'
+          }}
+          src={session.user?.image ?? ''}
+          alt="User Image"
+        />
+        <h1 style={{marginLeft:'1'}}>{session.user?.name}</h1>
+        </div>
         <button className="text-white bg-black p-4 cursor-pointer" onClick={(e) => {
-          e.preventDefault()
-          signOut()
+          e.preventDefault();
+          signOut();
         }}>Sign Out</button>
       </div>
-    )
+    );
   }
   return (
     <div onClick={() => signIn()} className="text-white bg-black p-4 cursor-pointer">Sign In</div>
